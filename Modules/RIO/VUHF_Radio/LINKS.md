@@ -28,4 +28,6 @@
 - [6 Digit 7 Segment Display](https://www.propwashsim.com/store/p/7segled)
 - [Concentric Rotary Encoder](https://www.propwashsim.com/store/p/dual-encoder-kit)
 - [7 Segment Display](https://www.digikey.com/en/products/detail/inolux/INND-TS30RAB/7604982)
-- [Shift Register](https://www.digikey.com/en/products/detail/texas-instruments/tpic6b595n/277601)
+- [Freq Change Switches](https://www.digikey.com/en/products/detail/e-switch/200MSP5T1B1M1QEH/378923)
+- [SQL & UHF Toggle](https://www.digikey.com/en/products/detail/apem-inc/5636ak2v/24876262)
+- [Brightness & Volume](https://www.digikey.com/en/products/detail/bourns-inc/PDB181-E425K-103B/16356109)
