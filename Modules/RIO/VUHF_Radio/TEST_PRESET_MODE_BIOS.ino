@@ -14,7 +14,7 @@ const int BPin = 5;
 
 #include "DcsBios.h"
 
-DCSBios::RotaryEnoder rioVuhfPresets("RIO_VUHF_PRESETS", "DEC", "INC", APin, BPin);
+DcsBios::RotaryEncoderT<POLL_EVERY_TIME, DcsBios::TWO_STEPS_PER_DETENT> rioVuhfPresets("RIO_VUHF_PRESETS", "DEC", "INC", APin, BPin);
 
 void setup() {
   DcsBios::setup();
@@ -23,4 +23,3 @@ void setup() {
 void loop() {
   DcsBios::loop();
 }
-

@@ -12,7 +12,7 @@ namespace DcsBios {
 		EIGHT_STEPS_PER_DETENT = 8,
 	};
 
-	template <unsigned long pollIntervalMs = POLL_EVERY_TIME, StepsPerDetent stepsPerDetent = TWO_STEPS_PER_DETENT>
+	template <unsigned long pollIntervalMs = POLL_EVERY_TIME, StepsPerDetent stepsPerDetent = ONE_STEP_PER_DETENT>
 	class RotaryEncoderT : PollingInput, public ResettableInput {
 	private:
 		const char* msg_;
