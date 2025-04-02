@@ -11,10 +11,13 @@
 
 const int APin = 4;
 const int BPin = 5;
+const int apin; 
+const int bpin;
 
 #include "DcsBios.h"
 
 DcsBios::RotaryEncoderT<POLL_EVERY_TIME, DcsBios::TWO_STEPS_PER_DETENT> rioVuhfPresets("RIO_VUHF_PRESETS", "DEC", "INC", APin, BPin);
+DcsBios::RotaryEncoderT<POLL_EVERY_TIME, DcsBios::TWO_STEPS_PER_DETENT> rioVuhfFreqMode("RIO_VUHF_FREQ_MODE", "DEC", "INC", apin, bpin);
 
 void setup() {
   DcsBios::setup();
