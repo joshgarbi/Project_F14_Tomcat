@@ -23,13 +23,10 @@ void display(String text, int dec) {
     max7219.DisplayChar(5, text[5], 0);
 }
 
-void onVuhfFreqChange(char* newValue) {
-    /* your code here */
-    String freq = String(newValue);
-    freq.remove(3, 1);
-    display(freq, 1);
+void onRioLightIntentConsoleChange(unsigned int newValue) {
+    display(String(newValue), 1);
 }
-DcsBios::StringBuffer<7> vuhfFreqBuffer(0x14e4, onVuhfFreqChange);
+DcsBios::IntegerBuffer rioLightIntentConsoleBuffer(0x1220, 0xf000, 12, onRioLightIntentConsoleChange);
 
 void setup() {
     DcsBios::setup();
