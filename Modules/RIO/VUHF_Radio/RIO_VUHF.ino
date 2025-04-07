@@ -16,8 +16,8 @@ const int apin = 2;
 const int bpin = 3;
 
 String freq;
-String preset;
-bool preset = false;
+bool preset = 0;
+int mappedBrightness = -1;
 
 MAX7219 max7219;
 
@@ -33,22 +33,18 @@ void display(String text, int dec) {
 void onRioVuhfDispChange(char* newValue) {
   freq = String(newValue);
   freq.remove(3, 1);
-  if (preset){
-    display(freq, 0);
-  } else {
-    display(freq, 1);
-  }
+  display(freq, preset);
 }
 DcsBios::StringBuffer<7> rioVuhfDispBuffer(0x14fc, onRioVuhfDispChange);
 
 void onRioVuhfFreqModeChange(unsigned int newValue) {
   if (newValue == 3) {
-    preset = true;
+    preset = 0;
   } else {
-    preset = false;
+    preset = 1;
   }
 }
-DcsBios::IntegerBuffer rioVuhfFreqModeBuffer(0x124a, onRioVuhfFreqModeChange);
+DcsBios::IntegerBuffer rioVuhfFreqModeBuffer(0x124a, 0x0007, 0, onRioVuhfFreqModeChange);
 
 DcsBios::Switch2Pos rioVuhfSquelch("RIO_VUHF_SQUELCH", SquelchPin);
 
@@ -56,6 +52,21 @@ DcsBios::Switch2Pos rioVuhfFmAm("RIO_VUHF_FM_AM", FmAmPin);
 
 DcsBios::RotaryEncoderT<POLL_EVERY_TIME, DcsBios::TWO_STEPS_PER_DETENT> rioVuhfPresets("RIO_VUHF_PRESETS", "DEC", "INC", APin, BPin);
 DcsBios::RotaryEncoderT<POLL_EVERY_TIME, DcsBios::TWO_STEPS_PER_DETENT> rioVuhfFreqMode("RIO_VUHF_FREQ_MODE", "DEC", "INC", apin, bpin);
+
+DcsBios::Potentiometer rioVuhfBrightness("RIO_VUHF_BRIGHTNESS", A1);
+DcsBios::Potentiometer rioVuhfVol("RIO_VUHF_VOL", A0);
+
+void onRioVuhfBrightnessChange(unsigned int newValue) {
+  mappedBrightness = map(newValue, 0, 65535, 0, 15);
+  mappedBrightness -= 1;
+  if (mappedBrightness != -1) {
+    max7219.MAX7219_ShutdownStop();
+    max7219.MAX7219_SetBrightness(mappedBrightness);
+  } else {
+    max7219.MAX7219_ShutdownStart();
+  }
+}
+DcsBios::IntegerBuffer rioVuhfBrightnessBuffer(F_14_RIO_VUHF_BRIGHTNESS, onRioVuhfBrightnessChange);
 
 void setup() {
   DcsBios::setup();
@@ -66,4 +77,3 @@ void setup() {
 void loop() {
   DcsBios::loop();
 }
-
