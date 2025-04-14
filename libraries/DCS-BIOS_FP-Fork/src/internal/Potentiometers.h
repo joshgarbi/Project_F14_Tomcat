@@ -8,7 +8,7 @@
 namespace DcsBios {
 
 	template <unsigned long pollIntervalMs = POLL_EVERY_TIME, unsigned int hysteresis = 128, unsigned int ewma_divisor = 5>
-	class PotentiometerEWMA : PollingInput, public ResettableInput {
+	class PotentiometerEWMA : PollingInput, public ResettableInput { 
 		private:
 			void resetState()
 			{
