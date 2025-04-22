@@ -36,6 +36,7 @@ pitch_input = 0
 up = True
 roll = 0  
 rolling_right = True
+correct_roll = 0
 
 running = True
 while running:
@@ -66,7 +67,17 @@ while running:
         pitch += map_value(pitch_input, -1, 1, 5, -5)
     #reverse pitch if upside down
 
+    #roll 180 degrees between 400 and 450 pitch
+    if pitch > 400 and correct_roll < 180:
+        roll += 3.6
+        correct_roll += 3.6
+    if pitch < -400 and correct_roll > -180:
+        roll += -3.6
+        correct_roll += -3.6
+    else:
+        correct_roll = 0
 
+    print(f"Pitch: {pitch}, Roll: {roll}")
     #mask outside of the circle
     mask = pygame.Surface((400, 400), pygame.SRCALPHA)
     mask.fill((0, 0, 0, 0))  # Transparent background
@@ -81,7 +92,7 @@ while running:
 
 
     # Draw blue sky
-    pygame.draw.rect(horizon_surface, (160, 230, 255), (100, 0, 200, 200-pitch))
+    pygame.draw.rect(horizon_surface, (160, 230, 255), (100, -250-pitch, 200, 450))
 
     # Draw black ground
     pygame.draw.rect(horizon_surface, (0, 0, 0), (100, 200-pitch, 200, 450))
