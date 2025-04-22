@@ -1,5 +1,5 @@
 // Created: 2025/04/08 12:24:41
-// Last modified: 2025/04/13 22:38:27
+// Last modified: 2025/04/17 22:34:52
 
 #define DCSBIOS_IRQ_SERIAL
 #include <max7219.h>
@@ -17,7 +17,7 @@ const int FmAmPin = 9;
 //freq pings
 const int freq025PinUp = 22;
 const int freq025PinDown = 23;
-const int freq01PinDown = 24;
+const int freq01PinDown = 24;pu
 const int freq01PinUp = 25;
 const int freq1PinUp = 26;
 const int freq1PinDown = 27;
@@ -37,8 +37,19 @@ const int volumePin = A0;
 //other necessary variables
 bool preset = 1;
 int mappedBrightness = -1;
+bool dcsConnected = false;
 
 MAX7219 max7219;
+
+//check if dcs is connected
+void onAcftNameChange(char* newValue) {
+  if (String(newValue) == "F-14B") {
+    dcsConnected = true;
+  } else {
+    dcsConnected = false;
+  }
+}
+DcsBios::StringBuffer<24> AcftNameBuffer(MetadataStart_ACFT_NAME_A, onAcftNameChange);
 
 //custom function to display the frequency on the 7-segment display
 void display(String text, int dec) {
@@ -88,8 +99,8 @@ DcsBios::Switch3Pos rioVuhf110Dial("RIO_VUHF_110_DIAL", freq110PinDown, freq110P
 
 //callback function to handle changes in the brightness setting and output the brightness
 void onRioVuhfBrightnessChange(unsigned int newValue) {
-  static unsigned int lastValue = -1; // Cache the last value
-  if (newValue != lastValue) {       // Only recompute if the value changes
+  static unsigned int lastValue = -1;
+  if (newValue != lastValue) {       
     lastValue = newValue;
     mappedBrightness = map(newValue, 0, 65535, 0, 15) - 1;
     if (mappedBrightness != -1) {
@@ -110,5 +121,10 @@ void setup() {
 
 void loop() {
   DcsBios::loop();
+  while (!dcsConnected) {
+    max7219.MAX7219_ShutdownStop();
+    delay(1000); 
+  }
+  max7219.MAX7219_ShutdownStart();
 }
  
