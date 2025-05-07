@@ -37,19 +37,8 @@ const int volumePin = A0;
 //other necessary variables
 bool preset = 1;
 int mappedBrightness = -1;
-bool dcsConnected = false;
 
 MAX7219 max7219;
-
-//check if dcs is connected
-void onAcftNameChange(char* newValue) {
-  if (String(newValue) == "F-14B") {
-    dcsConnected = true;
-  } else {
-    dcsConnected = false;
-  }
-}
-DcsBios::StringBuffer<24> AcftNameBuffer(MetadataStart_ACFT_NAME_A, onAcftNameChange);
 
 //custom function to display the frequency on the 7-segment display
 void display(String text, int dec) {
@@ -121,10 +110,5 @@ void setup() {
 
 void loop() {
   DcsBios::loop();
-  while (!dcsConnected) {
-    max7219.MAX7219_ShutdownStop();
-    delay(1000); 
-  }
-  max7219.MAX7219_ShutdownStart();
 }
  

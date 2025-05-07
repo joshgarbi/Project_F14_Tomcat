@@ -37,6 +37,7 @@ up = True
 roll = 0  
 rolling_right = True
 correct_roll = 0
+rolled_end = False
 
 running = True
 while running:
@@ -61,21 +62,28 @@ while running:
 
     roll += map_value(roll_input, -1, 1, -2, 2)
     
-    if is_upside_down(roll):
+    if is_upside_down(roll) and pitch < 400:
         pitch += map_value(pitch_input, -1, 1, -5, 5)
-    else:
+    if not is_upside_down(roll) and pitch > -400:
         pitch += map_value(pitch_input, -1, 1, 5, -5)
-    #reverse pitch if upside down
+    if is_upside_down(roll) and pitch > 400 and rolled_end == False:
+        roll += 180
+        rolled_end = True
+    if not is_upside_down(roll) and pitch < -400 and rolled_end == False:
+        roll += 180
+        rolled_end = True
+    if is_upside_down(roll) and pitch < -400 and rolled_end == False:
+        roll += 180
+        rolled_end = True
+    if not is_upside_down(roll) and pitch > 400 and rolled_end == False:
+        roll += 180
+        rolled_end = True
 
-    #roll 180 degrees between 400 and 450 pitch
-    if pitch > 400 and correct_roll < 180:
-        roll += 3.6
-        correct_roll += 3.6
-    if pitch < -400 and correct_roll > -180:
-        roll += -3.6
-        correct_roll += -3.6
-    else:
-        correct_roll = 0
+    if -400 < pitch < 400 and rolled_end == True:
+        rolled_end = False
+
+    
+    
 
     print(f"Pitch: {pitch}, Roll: {roll}")
     #mask outside of the circle
@@ -168,10 +176,6 @@ while running:
 
     pygame.display.flip()
     time.sleep(0.016)  # 60 FPS
-
-
-
-    
         
 pygame.quit()
 

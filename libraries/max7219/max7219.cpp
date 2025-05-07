@@ -116,6 +116,31 @@ unsigned char MAX7219::MAX7219_LookupCode (char character, unsigned int dp)
   return 0;                                             
 }
 
+unsigned char MAX7219::MAX7219_LookupCode_d (char character, unsigned int dp)
+{
+  int i;
+  unsigned int d=0;
+ if (dp) d=1;  
+  if (character>=35 && character<=44) {
+    character+=13;
+    d=1;
+  }
+  for (i = 0; MAX7219_Font_d[i].ascii; i++)              
+    if (character == MAX7219_Font_d[i].ascii){
+      if (d){
+        d=MAX7219_Font_d[i].segs;
+        d |= (1<<1);
+        return (d);                                    
+        }
+      else{
+        return MAX7219_Font_d[i].segs;                    
+      }
+    }
+      
+  return 0;                                             
+}
+
+
 void MAX7219::DisplayText(char *text, int justify){
   int decimal[16];
   char trimStr[16] = "";
@@ -154,6 +179,10 @@ void MAX7219::MAX7219_Write(volatile byte opcode, volatile byte data) {
 
 void MAX7219::DisplayChar(int digit, char value, bool dp) {
       MAX7219_Write(digit+1,MAX7219_LookupCode(value, dp));
+}
+
+void MAX7219::DisplayCharD(int digit, char value, bool dp) {
+      MAX7219_Write(6-digit,MAX7219_LookupCode_d(value, dp));
 }
 
 static void MAX7219::MAX7219_ShutdownStop (void)
