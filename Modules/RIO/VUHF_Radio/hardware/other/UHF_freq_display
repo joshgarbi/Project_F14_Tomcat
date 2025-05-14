@@ -1,2 +1,5 @@
 link : https://www.propwashsim.com/store/p/7segled
 max7219 : https://github.com/JemRF/max7219
+spec : 
+    color : red
+    digits : 6
