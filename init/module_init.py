@@ -1,7 +1,10 @@
 import os 
 
 # set working directory to C:\Users\joshu\Documents\personal_vsc_2\projects\Project_F14_Tomcat
-os.chdir(r'C:\\Users\\joshu\Documents\\personal_vsc_2\\projects\\Project_F14_Tomcat')
+try:
+    os.chdir(r'C:\\Users\\joshu\Documents\\personal_vsc_2\\projects\\Project_F14_Tomcat')
+except FileNotFoundError:
+    os.chdir(r"c:\\Users\\Josh\Documents\\VSC\DCS\\Project_F14_Tomcat")
 
 seats = ["Pilot", "RIO"]
 
@@ -25,8 +28,8 @@ os.mkdir(f"{module_path}\\BIOS_TESTING\\individual_alone")
 os.mkdir(f"{module_path}\\C")
 
 os.mkdir(f"{module_path}\\hardware")
-os.mkdir(f"{module_path}\\hardware\\design_files")
 os.mkdir(f"{module_path}\\hardware\\other")
 os.mkdir(f"{module_path}\\hardware\\switches")
 
 os.mkdir(f"{module_path}\\schematics")
+os.mkdir(f"{module_path}\\schematics\\model_files")
