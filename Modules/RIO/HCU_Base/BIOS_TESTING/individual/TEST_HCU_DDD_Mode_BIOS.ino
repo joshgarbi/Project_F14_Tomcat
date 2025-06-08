@@ -2,7 +2,7 @@
 
 #include "DcsBios.h"
 
-int UCU_DDD_Pin; // SET TO DESIRED PIN NUMBER
+int UCU_DDD_Pin = 2; // SET TO DESIRED PIN NUMBER
 
 DcsBios::ActionButton rioHcuDddToggle("RIO_HCU_DDD", "TOGGLE", UCU_DDD_Pin);
 

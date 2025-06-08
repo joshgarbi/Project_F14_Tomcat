@@ -2,7 +2,7 @@
 
 #include "DcsBios.h"
 
-int HCU_Pwr_rst_Pin;
+int HCU_Pwr_rst_Pin = 2;
 
 DcsBios::ActionButton rioHcuPwResetToggle("RIO_HCU_PW_RESET", "TOGGLE", HCU_Pwr_rst_Pin);
 

@@ -2,7 +2,7 @@
 
 #include "DcsBios.h"
 
-int HCU_TID_tggl_Pin; // SET TO DESIRED PIN NUMBER
+int HCU_TID_tggl_Pin = 2; // SET TO DESIRED PIN NUMBER
 
 DcsBios::ActionButton rioHcuTidToggle("RIO_HCU_TID", "TOGGLE", HCU_TID_tggl_Pin);
 

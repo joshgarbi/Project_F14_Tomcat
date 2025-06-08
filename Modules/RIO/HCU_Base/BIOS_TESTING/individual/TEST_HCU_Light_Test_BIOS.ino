@@ -2,7 +2,7 @@
 
 #include "DcsBios.h"
 
-int HCU_Lght_Tst; // SET TO DESIRED PIN NUMBER
+int HCU_Lght_Tst = 2; // SET TO DESIRED PIN NUMBER
 
 DcsBios::ActionButton rioHcuLightTestToggle("RIO_HCU_LIGHT_TEST", "TOGGLE", HCU_Light_Test);
 
