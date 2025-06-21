@@ -1,19 +1,22 @@
 #include <Stepper.h>                    //load library
 
-#define STEPS 100                       //establish number of steps
+#define STEPS 64                    //establish number of steps
 
-Stepper stepper(STEPS, 8,9,10,11);
+Stepper stepper1(STEPS, 8,9,10,11);
+Stepper stepper2(STEPS, 2,3,4,5);
 
 void setup() {
   // put your setup code here, to run once:
 
-stepper.setSpeed(30);                   //set speed of motor
+stepper1.setSpeed(32);
+stepper2.setSpeed(32/60);                   //set speed of motor
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-stepper.step(150);                      //tell stepper motor to step
+stepper1.step(1);                      //tell stepper motor to step
+stepper2.step(1);
 
 }
