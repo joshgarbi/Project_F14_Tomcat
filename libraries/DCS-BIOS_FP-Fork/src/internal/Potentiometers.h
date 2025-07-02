@@ -60,6 +60,11 @@ namespace DcsBios {
 					lastState_ = map(analogRead(pin_), input_min_, input_max_, 0, 65535);
 			}
 
+			void setInputRange(unsigned int input_min, unsigned int input_max) {
+        		input_min_ = input_min;
+        		input_max_ = input_max;
+    		}
+
 			void SetControl( const char* msg )
 			{
 				msg_ = msg;
