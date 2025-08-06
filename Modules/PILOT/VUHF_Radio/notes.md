@@ -11,3 +11,4 @@ check root README for links that are useful for all modules
 
 [Part Sheet #2](https://www.parttarget.com/5821-01-227-2154_5821012272154_707648-802.html/-c2e42915-ba4e-42d5-a200-3c55a6f75868?searchtext=012272154&searchoption=nsn&originalsearchtext=5821-01-227-2154)
 
+[Mil-Spec](https://mil-spec.tpub.com/MIL-R/MIL-R-81877B/index.htm)
