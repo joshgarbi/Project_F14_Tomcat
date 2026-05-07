@@ -15,20 +15,20 @@ const int SquelchPin = 8;
 const int FmAmPin = 9;
 
 //freq pings
-const int freq025PinUp = 22;
-const int freq025PinDown = 23;
-const int freq01PinDown = 24;
-const int freq01PinUp = 25;
+const int freq025PinUp = 23;
+const int freq025PinDown = 22;
+const int freq01PinDown = 25;
+const int freq01PinUp = 24;
 const int freq1PinUp = 26;
 const int freq1PinDown = 27;
 const int freq110PinUp = 28;
 const int freq110PinDown = 29;
 
 //concentric selector pins
-const int APin = 4;
-const int BPin = 5;
-const int apin = 2; 
-const int bpin = 3;
+const int APin = 35;
+const int BPin = 37;
+const int apin = 39; 
+const int bpin = 41;
 
 //potentiometer pins
 const int brighnessPin = A1;
@@ -37,6 +37,8 @@ const int volumePin = A0;
 //other necessary variables
 bool preset = 1;
 int mappedBrightness = -1;
+
+const byte rioVuhfModePins[5] = {2, 3, 4, 5, 6};
 
 MAX7219 max7219;
 
@@ -101,6 +103,8 @@ void onRioVuhfBrightnessChange(unsigned int newValue) {
   }
 }
 DcsBios::IntegerBuffer rioVuhfBrightnessBuffer(F_14_RIO_VUHF_BRIGHTNESS, onRioVuhfBrightnessChange);
+
+DcsBios::SwitchMultiPos rioVuhfMode("RIO_VUHF_MODE", rioVuhfModePins, 5);
 
 void setup() {
   DcsBios::setup();

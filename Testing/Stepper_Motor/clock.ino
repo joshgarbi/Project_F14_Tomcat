@@ -3,20 +3,15 @@
 #define STEPS 64                    //establish number of steps
 
 Stepper stepper1(STEPS, 8,9,10,11);
-Stepper stepper2(STEPS, 2,3,4,5);
 
 void setup() {
   // put your setup code here, to run once:
-
-stepper1.setSpeed(32);
-stepper2.setSpeed(32/60);                   //set speed of motor
-
+  // For 28BYJ-48: set speeds in RPM (typically 5-15 for this motor)
+  stepper1.setSpeed(32);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
-stepper1.step(1);                      //tell stepper motor to step
-stepper2.step(1);
-
+  // Step through a full rotation (64 steps * 64 gear ratio = 4096 steps)
+  stepper1.step(64);
 }

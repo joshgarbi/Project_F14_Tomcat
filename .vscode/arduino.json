@@ -1,3 +1,6 @@
 {
-    "port": "COM9"
+    "port": "COM12",
+    "board": "arduino:avr:uno",
+    "programmer": "usbasp",
+    "sketch": "Modules\\RIO\\VUHF_Radio\\RIO_VUHF_2.2.ino"
 }
